@@ -1,0 +1,7 @@
+# Python scripts & logs
+*.py
+*.log
+.vercel
+node_modules/
+.DS_Store
+Thumbs.db
