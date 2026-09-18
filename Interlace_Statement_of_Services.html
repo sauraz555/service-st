@@ -871,6 +871,7 @@ button {
                             <div class="money">
                                 <input id="paymentReceived" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
                             </div>
+                            <small style="color: #64748b; font-size: 11.5px; display: block; margin-top: 4px;">Total client funds deposited into client trust account.</small>
                         </div>
 
                         <div>
@@ -878,6 +879,7 @@ button {
                             <div class="money">
                                 <input id="operatingTransferred" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
                             </div>
+                            <small style="color: #64748b; font-size: 11.5px; display: block; margin-top: 4px;">Transferred to Operating upon completing the service.</small>
                         </div>
 
                         <div class="full">
@@ -885,8 +887,10 @@ button {
                             <div class="money">
                                 <input id="departmentFees" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
                             </div>
+                            <small style="color: #64748b; font-size: 11.5px; display: block; margin-top: 4px;">Leave blank ($0.00) if the client paid the Department or Assessing Authority directly.</small>
                         </div>
                     </div>
+                    <div id="ledgerWarningNotice" style="display: none; margin-top: 14px; padding: 10px 14px; background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; border-radius: 6px; font-size: 12.5px; color: #92400e; line-height: 1.4;"></div>
                 </div>
 
                 <div class="actions">
@@ -1002,6 +1006,16 @@ button {
                 </div>
 
                 <div class="ledger-row">
+                    <span>Total Departmental fees used for the application</span>
+                    <span id="pDepartmentFees">$0.00</span>
+                </div>
+
+                <div class="ledger-row strong" style="background: #f8fafc; border-top: 1px dashed #cbd5e1; border-bottom: 1px dashed #cbd5e1;">
+                    <span style="color: var(--brand);">Total costs & disbursements incurred to date</span>
+                    <span id="pTotalCharges" style="color: var(--brand);">$0.00</span>
+                </div>
+
+                <div class="ledger-row">
                     <span>Total payment received in client account to date</span>
                     <span id="pPaymentReceived">$0.00</span>
                 </div>
@@ -1012,18 +1026,8 @@ button {
                 </div>
 
                 <div class="ledger-row">
-                    <span>Total Departmental fees used for the application</span>
-                    <span id="pDepartmentFees">$0.00</span>
-                </div>
-
-                <div class="ledger-row">
                     <span>Current balance held in client account</span>
                     <span id="pClientAccountBalance">$0.00</span>
-                </div>
-
-                <div class="ledger-row strong">
-                    <span>Total fixed professional fee for the service provided</span>
-                    <span id="pProfessionalFee">$0.00</span>
                 </div>
             </div>
 
@@ -1097,21 +1101,33 @@ button {
         const operatingTransferred = value("operatingTransferred");
         const departmentFees = value("departmentFees");
 
-        const clientAccountBalance = roundMoney(
+        // Total costs incurred on behalf of the client (Professional Fee + Departmental/Disbursement Fees)
+        const totalCharges = roundMoney(professionalFee + departmentFees);
+
+        // Funds physically held in the client trust account.
+        // Under Australian MARA trust accounting, trust balance cannot be negative.
+        const rawTrustBalance = roundMoney(
             paymentReceived - operatingTransferred - departmentFees
         );
+        const clientAccountBalance = Math.max(0, rawTrustBalance);
 
+        // Net account position: Total payments received minus total charges incurred.
+        // If paymentReceived < totalCharges, netPosition is negative (client owes money).
+        // If paymentReceived > totalCharges, netPosition is positive (unused client funds remaining).
+        // If paymentReceived == totalCharges, netPosition is 0 (account fully settled).
         const netPosition = roundMoney(
-            paymentReceived - departmentFees - professionalFee
+            paymentReceived - totalCharges
         );
 
         return {
             price: priceExGst,
             gst,
             professionalFee,
+            totalCharges,
             paymentReceived,
             operatingTransferred,
             departmentFees,
+            rawTrustBalance,
             clientAccountBalance,
             netPosition
         };
@@ -1134,11 +1150,22 @@ button {
             if ($("pServiceTotal")) $("pServiceTotal").textContent = money(c.professionalFee);
 
             if ($("pTotalValue")) $("pTotalValue").textContent = money(c.professionalFee);
+            if ($("pDepartmentFees")) $("pDepartmentFees").textContent = money(c.departmentFees);
+            if ($("pTotalCharges")) $("pTotalCharges").textContent = money(c.totalCharges);
             if ($("pPaymentReceived")) $("pPaymentReceived").textContent = money(c.paymentReceived);
             if ($("pOperatingTransferred")) $("pOperatingTransferred").textContent = money(c.operatingTransferred);
-            if ($("pDepartmentFees")) $("pDepartmentFees").textContent = money(c.departmentFees);
             if ($("pClientAccountBalance")) $("pClientAccountBalance").textContent = money(c.clientAccountBalance);
-            if ($("pProfessionalFee")) $("pProfessionalFee").textContent = money(c.professionalFee);
+
+            // Dynamic live notice in form if withdrawals exceed deposits
+            const noticeEl = $("ledgerWarningNotice");
+            if (noticeEl) {
+                if (c.rawTrustBalance < 0) {
+                    noticeEl.style.display = "block";
+                    noticeEl.innerHTML = `⚠️ <b>Note:</b> Total withdrawals ($${(c.operatingTransferred + c.departmentFees).toFixed(2)}) exceed total payments received ($${c.paymentReceived.toFixed(2)}). If the client paid Department/Visa fees directly to Immigration, leave Departmental Fees as 0.00.`;
+                } else {
+                    noticeEl.style.display = "none";
+                }
+            }
 
             const card = $("positionCard");
             if (card) {
