@@ -236,7 +236,7 @@ label {
     font-weight: 700;
 }
 
-input, textarea {
+input, textarea, select {
     width: 100%;
     padding: 12px 13px;
     border: 1px solid #cad7df;
@@ -248,7 +248,7 @@ input, textarea {
     outline: none;
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
     border-color: var(--brand);
     box-shadow: 0 0 0 3px rgba(52, 103, 173, .11);
 }
@@ -544,6 +544,12 @@ button {
         color: var(--brand);
     }
 
+    .matter-highlight,
+    .matter-highlight b {
+        color: var(--danger) !important;
+        font-weight: 700;
+    }
+
     .date-panel {
         display: flex;
         flex-direction: column;
@@ -826,6 +832,21 @@ button {
 
                     <div class="form-grid">
                         <div>
+                            <label for="officeLocation">Office Location <span class="req">*</span></label>
+                            <select id="officeLocation" required>
+                                <option value="brisbane" selected>Brisbane, QLD</option>
+                                <option value="adelaide">Adelaide, SA</option>
+                                <option value="perth">Perth, WA</option>
+                                <option value="sydney">Sydney, NSW</option>
+                                <option value="kathmandu">Kathmandu, Nepal</option>
+                                <option value="bali">Bali, Indonesia</option>
+                                <option value="phnompenh">Phnom Penh, Cambodia</option>
+                                <option value="tokyo">Tokyo, Japan</option>
+                                <option value="nadi">Nadi, Fiji</option>
+                            </select>
+                        </div>
+
+                        <div>
                             <label for="clientName">Client Full Name <span class="req">*</span></label>
                             <input id="clientName" type="text" required placeholder="Enter client full name">
                         </div>
@@ -913,8 +934,8 @@ button {
             <div class="company-column">
                 <div>
                     <div class="company-name">Interlace Studies Pty Ltd</div>
-                    Level 1B, 181 Elizabeth Street<br>
-                    Brisbane City, QLD, 4000
+                    <span id="pOfficeAddressLine1"></span><br>
+                    <span id="pOfficeAddressLine2"></span>
                     <div class="company-abn"><strong>ABN:</strong> 88 623 971 522</div>
                 </div>
 
@@ -951,7 +972,7 @@ button {
             <div class="matter-grid">
                 <div class="matter-main">
                     <div class="client-name" id="pClientName"></div>
-                    <div><b>Matter:</b> <span id="pMatterName"></span> - Application: <span id="pVisaSubclass"></span></div>
+                    <div class="matter-highlight"><b>Matter:</b> <span id="pMatterName"></span> - Application: <span id="pVisaSubclass"></span></div>
                     <div><b>Address:</b> <span id="pAddress"></span></div>
                 </div>
 
@@ -1077,6 +1098,18 @@ button {
         });
     }
 
+    const OFFICES = {
+        brisbane: { line1: "Unit 1B, Level 1, 181 Elizabeth Street", line2: "Brisbane City QLD 4000" },
+        adelaide: { line1: "East Suite 3, Level 2, 50 Grenfell Street", line2: "Adelaide SA" },
+        perth: { line1: "Level 6, 231 Adelaide Terrace", line2: "Perth WA 6000" },
+        sydney: { line1: "Suite 32, Level 2, 650 George Street", line2: "Sydney NSW 2000" },
+        kathmandu: { line1: "JanaSahayog Marga, New Baneshwor", line2: "Kathmandu 44600, Nepal" },
+        bali: { line1: "Jl. Sang Hyang No.77B, Br. Cica Abianbase", line2: "Mengwi, Badung, Bali, 80351" },
+        phnompenh: { line1: "No. 63, Street 374 Corner 205", line2: "S/K Toul Svay Prey II, Khan Boeung Kengkorng, Phnom Penh, Cambodia" },
+        tokyo: { line1: "Sambu Ochiai Bldg 3F, 2 Chome-29-1 Kamiochiai", line2: "Shinjuku City, Tokyo 161-0034" },
+        nadi: { line1: "Lot 6 Vavabiau Road, Votualevu", line2: "Nadi, Fiji" }
+    };
+
     function formatDate(dateValue) {
         if (!dateValue) return "";
         const parts = dateValue.split("-");
@@ -1137,6 +1170,11 @@ button {
         try {
             const c = calculate();
             const clientName = $("clientName") ? $("clientName").value.trim() : "";
+
+            const officeKey = $("officeLocation") ? $("officeLocation").value : "brisbane";
+            const office = OFFICES[officeKey] || OFFICES.brisbane;
+            if ($("pOfficeAddressLine1")) $("pOfficeAddressLine1").textContent = office.line1;
+            if ($("pOfficeAddressLine2")) $("pOfficeAddressLine2").textContent = office.line2;
 
             if ($("pClientName")) $("pClientName").textContent = clientName;
             if ($("pMatterName")) $("pMatterName").textContent = clientName;
@@ -1205,6 +1243,7 @@ button {
     }
 
     [
+        "officeLocation",
         "clientName",
         "visaSubclass",
         "clientAddress",
