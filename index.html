@@ -29,130 +29,13 @@
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 14px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     color: var(--ink);
     background: var(--page);
-    -webkit-font-smoothing: antialiased;
 }
-
-.screen-title h1 {
-    margin: 0;
-    color: var(--brand);
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-}
-
-.screen-title p {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 13px;
-}
-
-/* Card containers for form sections with brand-blue left-border accent */
-.form-section-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-left: 4px solid var(--brand);
-    border-radius: 12px;
-    padding: 22px 24px 24px;
-    margin-bottom: 22px;
-    box-shadow: 0 2px 6px rgba(52, 103, 173, 0.05);
-}
-
-.section-heading {
-    margin: 0 0 16px;
-    color: var(--brand);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 20px;
-}
-
-.full {
-    grid-column: 1 / -1;
-}
-
-label {
-    display: block;
-    margin: 0 0 6px;
-    color: #334155;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.req {
-    color: #e11d48;
-    font-weight: 700;
-    margin-left: 2px;
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 11px 13px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    background: #ffffff;
-    color: var(--ink);
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 1.4;
-    transition: border-color .18s, box-shadow .18s;
-}
-
-input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--brand);
-    box-shadow: 0 0 0 3px rgba(52, 103, 173, .15);
-}
-
-.helper {
-    margin: -8px 0 16px;
-    color: #64748b;
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-/* Subtle driving fee card container */
-.driving-fee-card {
-    grid-column: 1 / -1;
-    background: #f0f7ff;
-    border: 1.5px solid #93c5fd;
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 4px;
-    transition: border-color .2s;
-}
-
-.driving-fee-card:focus-within {
-    border-color: var(--brand);
-    box-shadow: 0 0 0 3px rgba(52, 103, 173, .12);
-}
-
-.driving-fee-note {
-    color: #1e40af;
-    font-size: 12px;
-    font-weight: 500;
-    display: block;
-    margin-top: 6px;
-}
-
-
-
-/* Base body styling replaced below */
 
 /* =========================================================
-   STAFF INTERFACE
+   SIMPLE STAFF INTERFACE
    ========================================================= */
 .app {
     width: min(930px, calc(100% - 32px));
@@ -196,6 +79,7 @@ input:focus, textarea:focus, select:focus {
 .screen-title h1 {
     margin: 0;
     color: var(--brand);
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 26px;
 }
 
@@ -228,6 +112,12 @@ input:focus, textarea:focus, select:focus {
     grid-column: 1 / -1;
 }
 
+.req {
+    color: #e11d48;
+    font-weight: 700;
+    margin-left: 2px;
+}
+
 label {
     display: block;
     margin: 0 0 7px;
@@ -256,6 +146,16 @@ input:focus, textarea:focus, select:focus {
 textarea {
     min-height: 78px;
     resize: vertical;
+}
+
+select {
+    cursor: pointer;
+}
+
+input[readonly] {
+    background: #f3f6f8;
+    color: #56646d;
+    cursor: not-allowed;
 }
 
 .money {
@@ -400,6 +300,7 @@ button {
         z-index: 2;
     }
 
+    /* Header */
     .letterhead {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -433,8 +334,22 @@ button {
         margin-top: .7mm;
     }
 
+    .branch-address {
+        max-width: 84mm;
+        line-height: 1.38;
+    }
+
+    .branch-address > div {
+        white-space: nowrap;
+    }
+
     .email-block {
+        white-space: nowrap;
         line-height: 1.45;
+    }
+
+    .email-label {
+        color: #3f4d57;
     }
 
     .email-block .mail {
@@ -460,6 +375,7 @@ button {
         color: #26343d;
     }
 
+    /* Title */
     .document-title {
         text-align: center;
         margin: 0 0 4mm;
@@ -502,85 +418,87 @@ button {
         border-right: 1px solid #aebbc4;
     }
 
+    /* Client / Matter / Address / Statement Date - 2 x 2 summary grid */
     .matter-card {
         overflow: hidden;
-        margin-bottom: 3.5mm;
-        border: 1px solid #d3e0e8;
-        border-radius: 2mm;
-    }
-
-    .matter-heading {
-        padding: 1.6mm 3.6mm;
-        background: var(--brand) !important;
-        color: #fff !important;
-        font-size: 8pt;
-        font-weight: 700;
-        letter-spacing: .65px;
-        text-transform: uppercase;
+        margin-bottom: 3.1mm;
+        border: 1px solid #c9d8e2;
+        border-radius: 1.8mm;
+        background: #fff !important;
     }
 
     .matter-grid {
         display: grid;
-        grid-template-columns: 1.65fr .70fr;
-        min-height: 21mm;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .matter-cell {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
         background: #f8fbfd !important;
     }
 
-    .matter-main {
-        padding: 2.6mm 4mm;
-        font-size: 9pt;
-        line-height: 1.35;
+    .matter-cell:nth-child(2),
+    .matter-cell:nth-child(4) {
+        border-left: 1px solid #c9d8e2;
     }
 
-    .client-name {
-        margin-bottom: .7mm;
-        color: #17232b;
-        font-size: 10.8pt;
+    .matter-cell:nth-child(3),
+    .matter-cell:nth-child(4) {
+        border-top: 1px solid #c9d8e2;
+    }
+
+    .matter-section-heading {
+        padding: 1.25mm 3mm;
+        background: var(--brand) !important;
+        color: #fff !important;
+        font-size: 7.8pt;
         font-weight: 700;
-    }
-
-    .matter-main b,
-    .date-panel b {
-        color: var(--brand);
-    }
-
-    .matter-highlight,
-    .matter-highlight b {
-        color: var(--danger) !important;
-        font-weight: 700;
-    }
-
-    .matter-highlight {
-        margin-top: 1mm;
-        font-size: 15pt;
-        line-height: 1.25;
-    }
-
-    .date-panel {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 2.6mm 4mm;
-        border-left: 1px solid #d3e0e8;
-        background: #fff !important;
-        font-size: 8.8pt;
-        line-height: 1.4;
-    }
-
-    .date-panel-label {
-        margin-bottom: 1mm;
-        color: #667681;
-        font-size: 7.7pt;
-        font-weight: 700;
-        letter-spacing: .55px;
+        letter-spacing: .45px;
+        text-align: center;
         text-transform: uppercase;
     }
 
+    .matter-value {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 9.8mm;
+        padding: 2.1mm 3.2mm;
+        color: #17232b;
+        text-align: center;
+        line-height: 1.28;
+        overflow-wrap: anywhere;
+    }
+
+    /* Client and Matter values are intentionally one point larger. */
+    .matter-value-primary {
+        font-size: 9.3pt;
+        font-weight: 700;
+    }
+
+    .matter-value-secondary {
+        font-size: 8.3pt;
+        font-weight: 500;
+        color: #43525d;
+    }
+
+    /* Matter (application reference) is highlighted so staff can't miss it. */
+    .matter-cell.matter-highlight-cell .matter-value {
+        color: var(--danger) !important;
+        font-weight: 700;
+        font-size: 15pt;
+        min-height: 11mm;
+    }
+
+    /* Service table */
     .section-label {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 0 0 1.5mm;
+        margin: 0 0 1.2mm;
         color: var(--brand);
         font-size: 9.5pt;
         font-weight: 700;
@@ -604,10 +522,10 @@ button {
         border-spacing: 0;
         table-layout: fixed;
         overflow: hidden;
-        margin-bottom: 4mm;
+        margin-bottom: 3.6mm;
         border: 1px solid #aebec9;
         border-radius: 2mm;
-        font-size: 8.35pt;
+        font-size: 8.2pt;
     }
 
     .service-table th {
@@ -624,7 +542,7 @@ button {
     }
 
     .service-table td {
-        padding: 2.1mm 2.1mm;
+        padding: 1.95mm 2mm;
         vertical-align: top;
         background: #fff !important;
         border-top: 1px solid #bcc9d1;
@@ -645,14 +563,26 @@ button {
     .col-gst { width: 9%; }
     .col-total { width: 12%; }
 
+    .package-title {
+        margin-bottom: 1mm;
+        color: #26333c;
+        font-weight: 700;
+    }
+
+    .package-sub {
+        margin-bottom: 1.1mm;
+        color: #66737d;
+        font-size: 7.8pt;
+    }
+
     .service-list {
         margin: 0;
         padding-left: 4.8mm;
-        line-height: 1.35;
+        line-height: 1.24;
     }
 
     .service-list li {
-        margin: 0 0 1.2mm;
+        margin: 0 0 .65mm;
         padding-left: .5mm;
     }
 
@@ -661,6 +591,7 @@ button {
         white-space: nowrap;
     }
 
+    /* Financial summary */
     .finance-layout {
         display: grid;
         grid-template-columns: 1fr 59mm;
@@ -689,7 +620,7 @@ button {
     }
 
     .ledger-row span {
-        padding: 1.65mm 3mm;
+        padding: 1.48mm 3mm;
     }
 
     .ledger-row span:last-child {
@@ -785,9 +716,26 @@ button {
         color: var(--success);
     }
 
+    .authority-legend {
+        margin-top: 3.3mm;
+        padding: 2.4mm 3.2mm;
+        border: 1px solid #dbe5eb;
+        border-radius: 1.6mm;
+        background: #fbfdfe !important;
+        color: #5f6d77;
+        font-size: 7.25pt;
+        font-style: italic;
+        line-height: 1.38;
+    }
+
+    .authority-legend strong {
+        color: #45545f;
+        font-style: italic;
+    }
+
     .legal-note {
-        margin-top: 4.5mm;
-        padding: 2.6mm 3.4mm;
+        margin-top: 2.8mm;
+        padding: 2.4mm 3.4mm;
         border-left: 3px solid #a7c6dd;
         background: #f8fbfd !important;
         color: #66737d;
@@ -813,6 +761,12 @@ button {
         color: var(--brand);
     }
 }
+
+@media print {
+    .email-block {
+        font-size: 8.35pt;
+    }
+}
 </style>
 </head>
 <body>
@@ -832,92 +786,90 @@ button {
 
         <div class="form-body">
             <form id="statementForm" onsubmit="return false;">
-                <!-- Section 1: Client & Matter Details -->
-                <div class="form-section-card">
-                    <div class="section-heading">Client & Matter Details</div>
+                <div class="section-heading">Client & Matter Details</div>
 
-                    <div class="form-grid">
-                        <div>
-                            <label for="officeLocation">Office Location <span class="req">*</span></label>
-                            <select id="officeLocation" required>
-                                <option value="brisbane" selected>Brisbane, QLD</option>
-                                <option value="adelaide">Adelaide, SA</option>
-                                <option value="perth">Perth, WA</option>
-                                <option value="sydney">Sydney, NSW</option>
-                                <option value="kathmandu">Kathmandu, Nepal</option>
-                                <option value="bali">Bali, Indonesia</option>
-                                <option value="phnompenh">Phnom Penh, Cambodia</option>
-                                <option value="tokyo">Tokyo, Japan</option>
-                                <option value="nadi">Nadi, Fiji</option>
-                            </select>
-                        </div>
+                <div class="form-grid">
+                    <div class="full">
+                        <label for="branch">Branch <span class="req">*</span></label>
+                        <select id="branch" name="branch" required>
+                            <option value="Sydney" data-address1="Suite 32, Level 2, 650 George Street" data-address2="Sydney, NSW 2000">Sydney</option>
+                            <option value="Adelaide" data-address1="East Suite 3, Level 2, 50 Grenfell Street" data-address2="Adelaide, SA, 5000">Adelaide</option>
+                            <option value="Brisbane" data-address1="Unit 1B, Level 1, 181 Elizabeth Street" data-address2="Brisbane City, QLD 4000" selected>Brisbane</option>
+                            <option value="Perth" data-address1="Level 6, 231 Adelaide Terrace" data-address2="Perth WA 6000">Perth</option>
+                            <option value="Kathmandu" data-address1="JanaSahayog Marga, New Baneshwor" data-address2="Kathmandu 44600, Nepal">Kathmandu</option>
+                            <option value="Bali / Indonesia" data-address1="Jl. Cokroaminoto No.14, Pemecutan Kaja" data-address2="Kec. Denpasar Utara, Kota Denpasar, Bali 80111">Bali / Indonesia</option>
+                            <option value="Cambodia" data-address1="No. 63, Street 374 Corner 205, S/K Toul Svay Prey II" data-address2="Khan Boeung Kengkorng, Phnom Penh, Cambodia">Cambodia</option>
+                            <option value="Tokyo / Japan" data-address1="Sambu Ochiai, Bldg 3F, 2 Chome-29-1 Kamiochiai" data-address2="Shinjuku City, Tokyo 161-0034">Tokyo / Japan</option>
+                            <option value="Fiji" data-address1="Lot 6 Vavabiau Road, Votualevu" data-address2="Nadi, Fiji">Fiji</option>
+                        </select>
+                    </div>
 
-                        <div>
-                            <label for="clientName">Client Full Name <span class="req">*</span></label>
-                            <input id="clientName" type="text" required placeholder="Enter client full name">
-                        </div>
+                    <div>
+                        <label for="clientName">Client Full Name <span class="req">*</span></label>
+                        <input id="clientName" name="client_name" type="text" required placeholder="Enter client full name">
+                    </div>
 
-                        <div>
-                            <label for="visaSubclass">Matter / Application Reference <span class="req">*</span></label>
-                            <input id="visaSubclass" type="text" required placeholder="e.g. Subclass 500 or Skills Assessment">
-                        </div>
+                    <div>
+                        <label for="visaSubclass">Matter <span class="req">*</span></label>
+                        <input id="visaSubclass" name="visa_subclass" type="text" required placeholder="e.g. Student Visa Application">
+                    </div>
 
-                        <div class="full">
-                            <label for="clientAddress">Client Current Address <span class="req">*</span></label>
-                            <textarea id="clientAddress" required placeholder="Enter client's current address" rows="2"></textarea>
-                        </div>
+                    <div class="full">
+                        <label for="clientAddress">Client Current Address <span class="req">*</span></label>
+                        <textarea id="clientAddress" name="client_address" required placeholder="Enter client's current address"></textarea>
+                    </div>
 
-                        <div>
-                            <label for="statementDate">Statement Date <span class="req">*</span></label>
-                            <input id="statementDate" type="date" required>
-                        </div>
+                    <div>
+                        <label for="statementDate">Statement Date <span class="req">*</span></label>
+                        <input id="statementDate" name="statement_date" type="date" required>
+                    </div>
 
-                        <div>
-                            <label for="completionDate">Completion Date <span class="req">*</span></label>
-                            <input id="completionDate" type="date" required>
-                        </div>
+                    <div>
+                        <label for="completionDate">Completion Date <span class="req">*</span></label>
+                        <input id="completionDate" name="completion_date" type="date" required>
                     </div>
                 </div>
 
-                <!-- Section 2: Financial Details -->
-                <div class="form-section-card">
-                    <div class="section-heading">Financial Details</div>
-                    <div class="helper">The service is charged as one fixed-fee full-service package. Price is entered inclusive of GST directly.</div>
+                <hr class="divider">
 
-                    <div class="form-grid">
-                        <div class="driving-fee-card">
-                            <label for="price">Fixed Service Fee (including GST) <span class="req">*</span></label>
-                            <div class="money">
-                                <input id="price" type="number" min="0.01" step="0.01" required placeholder="0.00" onfocus="this.select()">
-                            </div>
-                            <small class="driving-fee-note">This figure drives the final statement calculations (automatically split into Ex-GST & GST).</small>
-                        </div>
+                <div class="section-heading">Financial Details</div>
+                <div class="helper">The service is charged as one fixed-fee full-service package. The fixed fee entered below is inclusive of GST, and balances are calculated automatically.</div>
 
-                        <div>
-                            <label for="paymentReceived">Total Payment Received in Client Account</label>
-                            <div class="money">
-                                <input id="paymentReceived" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
-                            </div>
-                            <small style="color: #64748b; font-size: 11.5px; display: block; margin-top: 4px;">Total client funds deposited into client trust account.</small>
-                        </div>
-
-                        <div>
-                            <label for="operatingTransferred">Professional Fees to be Transferred to Operating Account</label>
-                            <div class="money">
-                                <input id="operatingTransferred" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
-                            </div>
-                            <small style="color: #64748b; font-size: 11.5px; display: block; margin-top: 4px;">Transferred to Operating upon completing the service.</small>
-                        </div>
-
-                        <div class="full">
-                            <label for="departmentFees">Departmental / Authority Fees Used</label>
-                            <div class="money">
-                                <input id="departmentFees" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
-                            </div>
-                            <small style="color: #64748b; font-size: 11.5px; display: block; margin-top: 4px;">Leave blank ($0.00) if the client paid the Department or Assessing Authority directly.</small>
+                <div class="form-grid">
+                    <div>
+                        <label for="price">Fixed Service Fee (including GST) <span class="req">*</span></label>
+                        <div class="money">
+                            <input id="price" name="fixed_service_fee" type="number" min="0" step="0.01" placeholder="0.00" required onfocus="this.select()">
                         </div>
                     </div>
-                    <div id="ledgerWarningNotice" style="display: none; margin-top: 14px; padding: 10px 14px; background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; border-radius: 6px; font-size: 12.5px; color: #92400e; line-height: 1.4;"></div>
+
+                    <div>
+                        <label for="paymentReceived">Total Payment Received in Client Account</label>
+                        <div class="money">
+                            <input id="paymentReceived" name="payment_received" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="operatingTransferred">Total Professional Fee Eligible for Transfer to Operating Account</label>
+                        <div class="money">
+                            <input id="operatingTransferred" name="operating_transferred" type="number" min="0" step="0.01" placeholder="0.00" readonly>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="departmentFees">Departmental Fees Used for Application</label>
+                        <div class="money">
+                            <input id="departmentFees" name="department_fees" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
+                        </div>
+                    </div>
+
+                    <div class="full">
+                        <label for="authorityPayments">Other Payments made to Authorities / Third Parties on behalf of Client*</label>
+                        <div class="money">
+                            <input id="authorityPayments" name="authority_payments" type="number" min="0" step="0.01" placeholder="0.00" onfocus="this.select()">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="actions">
@@ -940,14 +892,17 @@ button {
             <div class="company-column">
                 <div>
                     <div class="company-name">Interlace Studies Pty Ltd</div>
-                    <span id="pOfficeAddressLine1"></span><br>
-                    <span id="pOfficeAddressLine2"></span>
+                    <div class="branch-address">
+                        <div id="pBranchAddressLine1"></div>
+                        <div id="pBranchAddressLine2"></div>
+                    </div>
                     <div class="company-abn"><strong>ABN:</strong> 88 623 971 522</div>
                 </div>
 
                 <div class="email-block">
-                    Email: <span class="mail">visa@interlacestudies.com</span><br>
-                    <span style="display:inline-block;width:10.8mm;"></span><span class="mail">visa@interlace.com.au</span>
+                    <span class="email-label">Email:</span>
+                    <span class="mail">visa@interlacestudies.com</span>,
+                    <span class="mail">visa@interlace.com.au</span>
                 </div>
             </div>
 
@@ -973,18 +928,25 @@ button {
         </section>
 
         <section class="matter-card">
-            <div class="matter-heading">Client & Matter</div>
-
             <div class="matter-grid">
-                <div class="matter-main">
-                    <div class="client-name" id="pClientName"></div>
-                    <div class="matter-highlight"><b>Matter:</b> <span id="pMatterName"></span></div>
-                    <div><b>Address:</b> <span id="pAddress"></span></div>
+                <div class="matter-cell">
+                    <div class="matter-section-heading">Client</div>
+                    <div class="matter-value matter-value-primary" id="pClientName"></div>
                 </div>
 
-                <div class="date-panel">
-                    <div class="date-panel-label">Statement Date</div>
-                    <div><b>Date:</b> <span id="pStatementDate"></span></div>
+                <div class="matter-cell matter-highlight-cell">
+                    <div class="matter-section-heading">Matter</div>
+                    <div class="matter-value matter-value-primary" id="pVisaSubclass"></div>
+                </div>
+
+                <div class="matter-cell">
+                    <div class="matter-section-heading">Address</div>
+                    <div class="matter-value matter-value-secondary" id="pAddress"></div>
+                </div>
+
+                <div class="matter-cell">
+                    <div class="matter-section-heading">Statement Date</div>
+                    <div class="matter-value matter-value-secondary" id="pStatementDate"></div>
                 </div>
             </div>
         </section>
@@ -1009,11 +971,14 @@ button {
                 <tr>
                     <td id="pCompletionDate"></td>
                     <td>
-                        <ul class="service-list" id="pServiceList">
-                            <li>Application eligibility assessment, including consideration of the applicable law, policy, and guidelines and their application to the client's circumstances and goals.</li>
-                            <li>Advice and assistance regarding information and documents required to support the application at lodgement.</li>
-                            <li>Preparation of the application, including necessary forms and supporting submissions.</li>
-                            <li>Compilation and finalisation of the application in the required form for lodgement.</li>
+                        <div class="package-title">Full Professional Service - Fixed Fee (incl. GST)</div>
+                        <div class="package-sub">The charge applies to the complete service package described below, is inclusive of GST, and is not calculated on an hourly basis.</div>
+                        <ul class="service-list">
+                            <li>Eligibility assessment, including consideration of the applicable law and policy and their application to the client's circumstances and goals.</li>
+                            <li>Advice and assistance regarding information and documents required to support the matter at the relevant stage.</li>
+                            <li>Preparation of the matter, including necessary forms, documents and supporting submissions.</li>
+                            <li>Compilation and finalisation of the matter in the required form for submission or lodgement.</li>
+                            <li>Submitting or lodging the matter with the relevant authority for processing and, where applicable, providing post-submission assistance with further information or documents received up to the Completion Date.</li>
                         </ul>
                     </td>
                     <td class="num" id="pPrice">$0.00</td>
@@ -1033,28 +998,33 @@ button {
                 </div>
 
                 <div class="ledger-row">
-                    <span>Total Departmental fees used for the application</span>
-                    <span id="pDepartmentFees">$0.00</span>
-                </div>
-
-                <div class="ledger-row strong" style="background: #f8fafc; border-top: 1px dashed #cbd5e1; border-bottom: 1px dashed #cbd5e1;">
-                    <span style="color: var(--brand);">Total costs & disbursements incurred to date</span>
-                    <span id="pTotalCharges" style="color: var(--brand);">$0.00</span>
-                </div>
-
-                <div class="ledger-row">
                     <span>Total payment received in client account to date</span>
                     <span id="pPaymentReceived">$0.00</span>
                 </div>
 
                 <div class="ledger-row">
-                    <span>Total professional fees to be transferred to Operating Account</span>
+                    <span>Total Professional Fee Eligible for Transfer to Operating Account</span>
                     <span id="pOperatingTransferred">$0.00</span>
+                </div>
+
+                <div class="ledger-row">
+                    <span>Total Departmental fees used for the application</span>
+                    <span id="pDepartmentFees">$0.00</span>
+                </div>
+
+                <div class="ledger-row">
+                    <span>Other Payments made to Authorities / Third Parties on behalf of Client*</span>
+                    <span id="pAuthorityPayments">$0.00</span>
                 </div>
 
                 <div class="ledger-row">
                     <span>Current balance held in client account</span>
                     <span id="pClientAccountBalance">$0.00</span>
+                </div>
+
+                <div class="ledger-row strong">
+                    <span>Total fixed professional fee for the service provided (incl. GST)</span>
+                    <span id="pProfessionalFee">$0.00</span>
                 </div>
             </div>
 
@@ -1067,6 +1037,13 @@ button {
                     <div class="position-note" id="positionNote"></div>
                 </div>
             </div>
+        </div>
+
+        <div class="authority-legend">
+            <strong>* Other payments made to Authorities / Third Parties:</strong>
+            exclude Departmental fees separately identified above and may include, but are not limited to,
+            amounts paid on the client's behalf to review authorities, skills assessing authorities, health examination providers,
+            police or character-certificate authorities, and other government or third-party bodies, where the payment is authorised under the Service Agreement.
         </div>
 
         <div class="legal-note">
@@ -1083,12 +1060,35 @@ button {
 
 <script>
 (function () {
+    "use strict";
+
     const $ = (id) => document.getElementById(id);
 
-    function value(id) {
-        const el = $(id);
-        if (!el || !el.value || el.value.trim() === "") return 0;
-        const n = parseFloat(el.value);
+    const editableFields = [
+        "branch",
+        "clientName",
+        "visaSubclass",
+        "clientAddress",
+        "statementDate",
+        "completionDate",
+        "price",
+        "paymentReceived",
+        "departmentFees",
+        "authorityPayments"
+    ];
+
+    const numericFields = [
+        "price",
+        "paymentReceived",
+        "departmentFees",
+        "authorityPayments"
+    ];
+
+    function numberValue(id) {
+        const element = $(id);
+        if (!element) return 0;
+
+        const n = parseFloat(element.value);
         return Number.isFinite(n) ? n : 0;
     }
 
@@ -1104,26 +1104,19 @@ button {
         });
     }
 
-    const OFFICES = {
-        brisbane: { line1: "Unit 1B, Level 1, 181 Elizabeth Street", line2: "Brisbane City QLD 4000" },
-        adelaide: { line1: "East Suite 3, Level 2, 50 Grenfell Street", line2: "Adelaide SA" },
-        perth: { line1: "Level 6, 231 Adelaide Terrace", line2: "Perth WA 6000" },
-        sydney: { line1: "Suite 32, Level 2, 650 George Street", line2: "Sydney NSW 2000" },
-        kathmandu: { line1: "JanaSahayog Marga, New Baneshwor", line2: "Kathmandu 44600, Nepal" },
-        bali: { line1: "Jl. Sang Hyang No.77B, Br. Cica Abianbase", line2: "Mengwi, Badung, Bali, 80351" },
-        phnompenh: { line1: "No. 63, Street 374 Corner 205", line2: "S/K Toul Svay Prey II, Khan Boeung Kengkorng, Phnom Penh, Cambodia" },
-        tokyo: { line1: "Sambu Ochiai Bldg 3F, 2 Chome-29-1 Kamiochiai", line2: "Shinjuku City, Tokyo 161-0034" },
-        nadi: { line1: "Lot 6 Vavabiau Road, Votualevu", line2: "Nadi, Fiji" }
-    };
-
     function formatDate(dateValue) {
         if (!dateValue) return "";
+
         const parts = dateValue.split("-");
         if (parts.length !== 3) return dateValue;
 
-        const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        const date = new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2])
+        );
 
-        return d.toLocaleDateString("en-AU", {
+        return date.toLocaleDateString("en-AU", {
             day: "2-digit",
             month: "long",
             year: "numeric"
@@ -1131,44 +1124,60 @@ button {
     }
 
     function calculate() {
-        // Total price is entered directly inclusive of GST
-        const professionalFee = value("price");
-        const priceExGst = roundMoney(professionalFee / 1.10);
-        const gst = roundMoney(professionalFee - priceExGst);
+        // The entered fixed service fee is GST-inclusive.
+        const professionalFee = numberValue("price");
+        const gst = roundMoney(professionalFee / 11);
+        const price = roundMoney(professionalFee - gst);
 
-        const paymentReceived = value("paymentReceived");
-        const operatingTransferred = value("operatingTransferred");
-        const departmentFees = value("departmentFees");
+        const paymentReceived = numberValue("paymentReceived");
+        const operatingTransferred = professionalFee;
+        const departmentFees = numberValue("departmentFees");
+        const authorityPayments = numberValue("authorityPayments");
 
-        // Total costs incurred on behalf of the client (Professional Fee + Departmental/Disbursement Fees)
-        const totalCharges = roundMoney(professionalFee + departmentFees);
-
-        // Funds physically held in the client trust account.
-        // Under Australian MARA trust accounting, trust balance cannot be negative.
-        const rawTrustBalance = roundMoney(
-            paymentReceived - operatingTransferred - departmentFees
+        // Actual balance still physically held in the client account.
+        const clientAccountBalance = roundMoney(
+            paymentReceived
+            - operatingTransferred
+            - departmentFees
+            - authorityPayments
         );
-        const clientAccountBalance = Math.max(0, rawTrustBalance);
 
-        // Net account position: Total payments received minus total charges incurred.
-        // If paymentReceived < totalCharges, netPosition is negative (client owes money).
-        // If paymentReceived > totalCharges, netPosition is positive (unused client funds remaining).
-        // If paymentReceived == totalCharges, netPosition is 0 (account fully settled).
+        // Overall matter position using the GST-inclusive fixed fee.
+        // Negative = client still owes money.
+        // Positive = client funds remain after all listed charges.
         const netPosition = roundMoney(
-            paymentReceived - totalCharges
+            paymentReceived
+            - departmentFees
+            - authorityPayments
+            - professionalFee
         );
 
         return {
-            price: priceExGst,
+            price,
             gst,
             professionalFee,
-            totalCharges,
             paymentReceived,
             operatingTransferred,
             departmentFees,
-            rawTrustBalance,
+            authorityPayments,
             clientAccountBalance,
             netPosition
+        };
+    }
+
+    function getSelectedBranch() {
+        const branch = $("branch");
+
+        if (!branch || branch.selectedIndex < 0) {
+            return { name: "", addressLine1: "", addressLine2: "" };
+        }
+
+        const option = branch.options[branch.selectedIndex];
+
+        return {
+            name: branch.value || "",
+            addressLine1: option ? (option.dataset.address1 || "") : "",
+            addressLine2: option ? (option.dataset.address2 || "") : ""
         };
     }
 
@@ -1176,14 +1185,16 @@ button {
         try {
             const c = calculate();
             const clientName = $("clientName") ? $("clientName").value.trim() : "";
+            const selectedBranch = getSelectedBranch();
 
-            const officeKey = $("officeLocation") ? $("officeLocation").value : "brisbane";
-            const office = OFFICES[officeKey] || OFFICES.brisbane;
-            if ($("pOfficeAddressLine1")) $("pOfficeAddressLine1").textContent = office.line1;
-            if ($("pOfficeAddressLine2")) $("pOfficeAddressLine2").textContent = office.line2;
+            if ($("pBranchAddressLine1")) $("pBranchAddressLine1").textContent = selectedBranch.addressLine1;
+            if ($("pBranchAddressLine2")) $("pBranchAddressLine2").textContent = selectedBranch.addressLine2;
+
+            // Automatically show the total GST-inclusive professional fee to be transferred.
+            if ($("operatingTransferred")) $("operatingTransferred").value = c.professionalFee ? c.professionalFee.toFixed(2) : "";
 
             if ($("pClientName")) $("pClientName").textContent = clientName;
-            if ($("pMatterName")) $("pMatterName").textContent = $("visaSubclass") ? $("visaSubclass").value.trim() : "";
+            if ($("pVisaSubclass")) $("pVisaSubclass").textContent = $("visaSubclass") ? $("visaSubclass").value.trim() : "";
             if ($("pAddress")) $("pAddress").textContent = $("clientAddress") ? $("clientAddress").value.trim() : "";
             if ($("pStatementDate")) $("pStatementDate").textContent = formatDate($("statementDate") ? $("statementDate").value : "");
             if ($("pCompletionDate")) $("pCompletionDate").textContent = formatDate($("completionDate") ? $("completionDate").value : "");
@@ -1193,22 +1204,12 @@ button {
             if ($("pServiceTotal")) $("pServiceTotal").textContent = money(c.professionalFee);
 
             if ($("pTotalValue")) $("pTotalValue").textContent = money(c.professionalFee);
-            if ($("pDepartmentFees")) $("pDepartmentFees").textContent = money(c.departmentFees);
-            if ($("pTotalCharges")) $("pTotalCharges").textContent = money(c.totalCharges);
             if ($("pPaymentReceived")) $("pPaymentReceived").textContent = money(c.paymentReceived);
             if ($("pOperatingTransferred")) $("pOperatingTransferred").textContent = money(c.operatingTransferred);
+            if ($("pDepartmentFees")) $("pDepartmentFees").textContent = money(c.departmentFees);
+            if ($("pAuthorityPayments")) $("pAuthorityPayments").textContent = money(c.authorityPayments);
             if ($("pClientAccountBalance")) $("pClientAccountBalance").textContent = money(c.clientAccountBalance);
-
-            // Dynamic live notice in form if withdrawals exceed deposits
-            const noticeEl = $("ledgerWarningNotice");
-            if (noticeEl) {
-                if (c.rawTrustBalance < 0) {
-                    noticeEl.style.display = "block";
-                    noticeEl.innerHTML = `⚠️ <b>Note:</b> Total withdrawals ($${(c.operatingTransferred + c.departmentFees).toFixed(2)}) exceed total payments received ($${c.paymentReceived.toFixed(2)}). If the client paid Department/Visa fees directly to Immigration, leave Departmental Fees as 0.00.`;
-                } else {
-                    noticeEl.style.display = "none";
-                }
-            }
+            if ($("pProfessionalFee")) $("pProfessionalFee").textContent = money(c.professionalFee);
 
             const card = $("positionCard");
             if (card) {
@@ -1219,18 +1220,18 @@ button {
                     if ($("positionLabel")) $("positionLabel").textContent = "Amount Due";
                     if ($("positionAmount")) $("positionAmount").textContent = money(Math.abs(c.netPosition));
                     if ($("positionNote")) $("positionNote").textContent =
-                        "This amount remains payable in relation to the fixed-fee service shown in this statement. Once received, the amount attributable to professional fees will be transferred to our Operating Account in accordance with the Service Agreement.";
+                        "This amount remains payable after allowing for the fixed professional fee, Departmental fees and payments made to authorities shown in this statement. Once received, the professional fee shown above will be eligible for transfer to our Operating Account in accordance with the Service Agreement and applicable requirements.";
                 } else if (c.netPosition > 0) {
                     if ($("positionLabel")) $("positionLabel").textContent = "Client Funds Remaining";
                     if ($("positionAmount")) $("positionAmount").textContent = money(c.netPosition);
                     if ($("positionNote")) $("positionNote").textContent =
-                        "This amount represents client funds remaining after the professional fee and disbursements shown above. Any unused client money remaining at the conclusion of the matter will be returned to the client.";
+                        "Any client money remaining after payment of authorised professional fees, Departmental fees and other authorised disbursements will, where refundable, be returned to the client in accordance with the Service Agreement and applicable requirements.";
                 } else {
                     card.classList.add("clear");
                     if ($("positionLabel")) $("positionLabel").textContent = "Account Settled";
                     if ($("positionAmount")) $("positionAmount").textContent = "$0.00";
                     if ($("positionNote")) $("positionNote").textContent =
-                        "No further amount is due and no unused client funds remain after the fees and disbursements shown in this statement.";
+                        "No further amount is due and no unused client funds remain after the professional fee, Departmental fees and payments made to authorities shown in this statement.";
                 }
             }
         } catch (err) {
@@ -1247,18 +1248,37 @@ button {
         if ($("statementDate")) $("statementDate").value = localDate;
     }
 
-    [
-        "officeLocation",
-        "clientName",
-        "visaSubclass",
-        "clientAddress",
-        "statementDate",
-        "completionDate",
-        "price",
-        "paymentReceived",
-        "operatingTransferred",
-        "departmentFees"
-    ].forEach((id) => {
+    function printStatement() {
+        const form = $("statementForm");
+        if (form && !form.reportValidity()) return false;
+
+        try {
+            syncPrint();
+            setTimeout(function () {
+                window.print();
+            }, 50);
+            return true;
+        } catch (error) {
+            console.error("Print preparation error:", error);
+            window.print();
+            return false;
+        }
+    }
+
+    function resetStatement() {
+        const form = $("statementForm");
+        if (form) form.reset();
+
+        numericFields.forEach((id) => {
+            const el = $(id);
+            if (el) el.value = "";
+        });
+
+        setToday();
+        syncPrint();
+    }
+
+    editableFields.forEach((id) => {
         const el = $(id);
         if (el) {
             el.addEventListener("input", syncPrint);
@@ -1266,49 +1286,29 @@ button {
         }
     });
 
-    // Print Statement of Services directly
-    $("printBtn").addEventListener("click", function () {
-        const form = $("statementForm");
-
-        if (form && !form.reportValidity()) {
-            return;
-        }
-
-        const priceEl = $("price");
-        const priceVal = priceEl ? parseFloat(priceEl.value) : 0;
-        if (isNaN(priceVal) || priceVal <= 0) {
-            alert("The Fixed Service Fee (Price) field is mandatory. Please enter a valid fee amount.");
-            if (priceEl) priceEl.focus();
-            return;
-        }
-
-        syncPrint();
-
-        try {
-            window.print();
-        } catch (err) {
-            console.error("Print error:", err);
-            window.print();
+    numericFields.forEach((id) => {
+        const el = $(id);
+        if (el) {
+            el.addEventListener("focus", function () {
+                this.select();
+            });
         }
     });
 
-    $("resetBtn").addEventListener("click", function () {
-        const form = $("statementForm");
-        if (form) form.reset();
-
-        if ($("price")) $("price").value = "";
-        if ($("paymentReceived")) $("paymentReceived").value = "";
-        if ($("operatingTransferred")) $("operatingTransferred").value = "";
-        if ($("departmentFees")) $("departmentFees").value = "";
-
-        setToday();
-        syncPrint();
-    });
-
+    if ($("printBtn")) $("printBtn").addEventListener("click", printStatement);
+    if ($("resetBtn")) $("resetBtn").addEventListener("click", resetStatement);
     window.addEventListener("beforeprint", syncPrint);
 
     setToday();
     syncPrint();
+
+    // Public API for integrating this module into an existing CRM/system.
+    window.InterlaceStatement = {
+        sync: syncPrint,
+        print: printStatement,
+        reset: resetStatement,
+        calculate: calculate
+    };
 })();
 </script>
 
