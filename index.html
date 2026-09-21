@@ -550,6 +550,12 @@ button {
         font-weight: 700;
     }
 
+    .matter-highlight {
+        margin-top: 1mm;
+        font-size: 15pt;
+        line-height: 1.25;
+    }
+
     .date-panel {
         display: flex;
         flex-direction: column;
@@ -972,7 +978,7 @@ button {
             <div class="matter-grid">
                 <div class="matter-main">
                     <div class="client-name" id="pClientName"></div>
-                    <div class="matter-highlight"><b>Matter:</b> <span id="pMatterName"></span> - Application: <span id="pVisaSubclass"></span></div>
+                    <div class="matter-highlight"><b>Matter:</b> <span id="pMatterName"></span></div>
                     <div><b>Address:</b> <span id="pAddress"></span></div>
                 </div>
 
@@ -1177,8 +1183,7 @@ button {
             if ($("pOfficeAddressLine2")) $("pOfficeAddressLine2").textContent = office.line2;
 
             if ($("pClientName")) $("pClientName").textContent = clientName;
-            if ($("pMatterName")) $("pMatterName").textContent = clientName;
-            if ($("pVisaSubclass")) $("pVisaSubclass").textContent = $("visaSubclass") ? $("visaSubclass").value.trim() : "";
+            if ($("pMatterName")) $("pMatterName").textContent = $("visaSubclass") ? $("visaSubclass").value.trim() : "";
             if ($("pAddress")) $("pAddress").textContent = $("clientAddress") ? $("clientAddress").value.trim() : "";
             if ($("pStatementDate")) $("pStatementDate").textContent = formatDate($("statementDate") ? $("statementDate").value : "");
             if ($("pCompletionDate")) $("pCompletionDate").textContent = formatDate($("completionDate") ? $("completionDate").value : "");
