@@ -283,8 +283,8 @@ button {
         grid-template-columns: 1fr 1fr;
         gap: 14mm;
         align-items: stretch;
-        min-height: 31mm;
-        margin-bottom: 3mm;
+        min-height: 29mm;
+        margin-bottom: 2.5mm;
     }
 
     .company-column,
@@ -359,8 +359,8 @@ button {
     /* Title */
     .document-title {
         text-align: center;
-        margin: 0 0 4mm;
-        padding: 0 0 3mm;
+        margin: 0 0 3.2mm;
+        padding: 0 0 2.3mm;
         border-bottom: 1.5px solid var(--brand);
     }
 
@@ -375,7 +375,7 @@ button {
 
     .title-rule {
         width: 77mm;
-        margin: 2.2mm auto 2.7mm;
+        margin: 1.7mm auto 2.1mm;
         border-top: 1px solid #aab8c2;
     }
 
@@ -402,7 +402,7 @@ button {
     /* Client / Matter / Address / Statement Date - 2 x 2 summary grid */
     .matter-card {
         overflow: hidden;
-        margin-bottom: 3.1mm;
+        margin-bottom: 2.6mm;
         border: 1px solid #c9d8e2;
         border-radius: 1.8mm;
         background: #fff !important;
@@ -446,11 +446,11 @@ button {
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 9.8mm;
-        padding: 2.1mm 3.2mm;
+        min-height: 8.6mm;
+        padding: 1.7mm 3.2mm;
         color: #17232b;
         text-align: center;
-        line-height: 1.28;
+        line-height: 1.24;
         overflow-wrap: anywhere;
     }
 
@@ -495,14 +495,14 @@ button {
         border-spacing: 0;
         table-layout: fixed;
         overflow: hidden;
-        margin-bottom: 3.6mm;
+        margin-bottom: 3mm;
         border: 1px solid #aebec9;
         border-radius: 2mm;
         font-size: 8.2pt;
     }
 
     .service-table th {
-        padding: 1.9mm 1.6mm;
+        padding: 1.5mm 1.6mm;
         background: var(--brand) !important;
         color: #fff !important;
         text-align: center;
@@ -515,7 +515,7 @@ button {
     }
 
     .service-table td {
-        padding: 1.95mm 2mm;
+        padding: 1.6mm 2mm;
         vertical-align: top;
         background: #fff !important;
         border-top: 1px solid #bcc9d1;
@@ -537,25 +537,25 @@ button {
     .col-total { width: 12%; }
 
     .package-title {
-        margin-bottom: 1mm;
+        margin-bottom: .8mm;
         color: #26333c;
         font-weight: 700;
     }
 
     .package-sub {
-        margin-bottom: 1.1mm;
+        margin-bottom: .9mm;
         color: #66737d;
-        font-size: 7.8pt;
+        font-size: 7.6pt;
     }
 
     .service-list {
         margin: 0;
         padding-left: 4.8mm;
-        line-height: 1.24;
+        line-height: 1.18;
     }
 
     .service-list li {
-        margin: 0 0 .65mm;
+        margin: 0 0 .45mm;
         padding-left: .5mm;
     }
 
@@ -576,11 +576,11 @@ button {
         overflow: hidden;
         border: 1px solid #d3dfe6;
         border-radius: 2mm;
-        font-size: 8.35pt;
+        font-size: 8.1pt;
     }
 
     .ledger-heading {
-        padding: 2mm 3mm;
+        padding: 1.5mm 3mm;
         background: var(--brand-light) !important;
         color: var(--brand);
         font-weight: 700;
@@ -593,7 +593,7 @@ button {
     }
 
     .ledger-row span {
-        padding: 1.48mm 3mm;
+        padding: 1.05mm 3mm;
     }
 
     .ledger-row span:last-child {
@@ -690,15 +690,15 @@ button {
     }
 
     .authority-legend {
-        margin-top: 3.3mm;
-        padding: 2.4mm 3.2mm;
+        margin-top: 2.2mm;
+        padding: 1.7mm 3.2mm;
         border: 1px solid #dbe5eb;
         border-radius: 1.6mm;
         background: #fbfdfe !important;
         color: #5f6d77;
-        font-size: 7.25pt;
+        font-size: 7pt;
         font-style: italic;
-        line-height: 1.38;
+        line-height: 1.3;
     }
 
     .authority-legend strong {
@@ -707,14 +707,14 @@ button {
     }
 
     .legal-note {
-        margin-top: 2.8mm;
-        padding: 2.4mm 3.4mm;
+        margin-top: 2mm;
+        padding: 1.8mm 3.4mm;
         border-left: 3px solid #a7c6dd;
         background: #f8fbfd !important;
         color: #66737d;
-        font-size: 7.4pt;
+        font-size: 7.2pt;
         font-style: italic;
-        line-height: 1.38;
+        line-height: 1.3;
     }
 
     .footer {
